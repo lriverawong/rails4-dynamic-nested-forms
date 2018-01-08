@@ -17,6 +17,19 @@ class PlacesController < ApplicationController
       render :new
     end
   end
+  
+  def edit
+    @place = Place.find_by(id: params[:id])
+  end
+
+  def update
+    @place = Place.find_by(id: params[:id])
+    if @place.update_attributes(place_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
 
   private
 
