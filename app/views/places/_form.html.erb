@@ -8,18 +8,18 @@
   <div>
     <p><strong>Addresses:</strong></p>
 
-    <%= f.fields_for :addresses do |address| %>
-      <div>
-        <%= address.label :city %>
-        <%= address.text_field :city %>
+    <div id="addresses">
+      <%= f.fields_for :addresses do |address| %>
+        <%= render 'address_fields', f: address %>
+      <% end %>
 
-        <%= address.label :street %>
-        <%= address.text_field :street %>
-
-        <%= address.check_box :_destroy %>
+      <div class="links">
+        <%= link_to_add_association 'add address', f, :addresses %>
       </div>
-    <% end %>
+    </div>
   </div>
+
+  <%# -- Extracted the previous form parts below into another partial: _address_fields %>
 
   <%= f.submit %>
 <% end %>
