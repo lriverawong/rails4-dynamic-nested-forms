@@ -1,9 +1,22 @@
-<%= render 'shared/errors', object: @place %>
-
 <%= form_for @place do |f| %>
+  <%= render 'shared/errors', object: @place %>
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <p><strong>Addresses:</strong></p>
+
+    <%= f.fields_for :addresses do |address| %>
+      <div>
+        <%= address.label :city %>
+        <%= address.text_field :city %>
+
+        <%= address.label :street %>
+        <%= address.text_field :street %>
+      </div>
+    <% end %>
   </div>
 
   <%= f.submit %>

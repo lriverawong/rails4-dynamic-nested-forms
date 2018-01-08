@@ -1,11 +1,12 @@
 class PlacesController < ApplicationController
-  class PlacesController < ApplicationController
   def index
     @places = Place.all
   end
 
   def new
     @place = Place.new
+    # temporary solution to show fields for nested_attributes
+    3.times { @place.addresses.build}
   end
 
   def create
@@ -20,8 +21,6 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:title)
+    params.require(:place).permit(:title, addresses_attributes: [:id, :city, :street, :_destroy])
   end
-end
-
 end
